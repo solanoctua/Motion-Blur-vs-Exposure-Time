@@ -7,7 +7,7 @@ Motion blur is a critical factor in achieving high precision in optical target t
 
 When motion blur exceeds the acceptable threshold, it can cause the target to spread across multiple pixels, reducing the clarity of the image. This degradation makes it challenging to accurately identify and track the target, potentially leading to errors in measurement and analysis.
 
-Target Size and Detection: The size of the target, combined with the amount of motion blur, can significantly affect the performance of tracking algorithms. Larger targets may tolerate slightly more blur compared to smaller ones. However, the tolerance depends on the specific algorithm used for detection and tracking. For algorithms that rely on high-resolution detail, even minor blur can impact their effectiveness.
+Larger targets may tolerate slightly more blur compared to smaller ones. However, the tolerance depends on the specific algorithm used for detection and tracking. For algorithms that rely on high-resolution detail, even minor blur can impact their effectiveness.
 
 ## Formulation
 
