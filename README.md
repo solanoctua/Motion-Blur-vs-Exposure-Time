@@ -1,6 +1,14 @@
 # Motion-Blur-vs-Exposure-Time
 The script calculates the maximum allowable exposure time for a camera to avoid motion blur that exceeds a specified threshold. This is crucial in scenarios requiring high precision, such as optical target tracking.
 
+## Why We Bother
+
+Motion blur is a critical factor in achieving high precision in optical target tracking systems. Ideally, motion blur should not exceed 10% of the pixel size to ensure that the image remains sharp and the target can be accurately detected and tracked.
+
+When motion blur exceeds the acceptable threshold, it can cause the target to spread across multiple pixels, reducing the clarity of the image. This degradation makes it challenging to accurately identify and track the target, potentially leading to errors in measurement and analysis.
+
+Target Size and Detection: The size of the target, combined with the amount of motion blur, can significantly affect the performance of tracking algorithms. Larger targets may tolerate slightly more blur compared to smaller ones. However, the tolerance depends on the specific algorithm used for detection and tracking. For algorithms that rely on high-resolution detail, even minor blur can impact their effectiveness.
+
 ## Formulation
 
 Motion blur occurs when a target or the camera moves while the camera's shutter is open. The moving target will spread across several pixels on the sensor, resulting in blur. The amount of motion blur depends on:
