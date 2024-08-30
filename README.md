@@ -14,22 +14,19 @@ The script calculates the maximum allowable exposure time for a camera to avoid 
 
 The script calculates the maximum allowable exposure time (`t_exp`) based on the given motion blur threshold (`blur_thresh`). The relationship is derived from the basic motion blur equation:
 
-\[
-\text{Motion Blur} = \frac{v_{\text{rel}} \times t_{\text{exp}} \times \text{focal\_len}}{z \times \text{px\_size}}
-\]
+Motion Blur = (v_rel × t_exp × focal_len) / (z × px_size)
 
 Where:
 
-- \(v_{\text{rel}}\) is the relative velocity of the target.
-- \(t_{\text{exp}}\) is the exposure time.
-- \(\text{focal\_len}\) is the focal length.
-- \(z\) is the distance to the target.
-- \(\text{px\_size}\) is the pixel size.
+- `v_rel` is the relative velocity of the target.
+- `t_exp` is the exposure time.
+- `focal_len` is the focal length.
+- `z` is the distance to the target.
+- `px_size` is the pixel size.
 
 To find the exposure time, the equation is rearranged as follows:
 
-\[
-t_{\text{exp}} = \frac{\text{blur\_thresh} \times z \times \text{px\_size}}{v_{\text{rel}} \times \text{focal\_len}}
-\]
+t_exp = (blur_thresh × z × px_size) / (v_rel × focal_len)
 
 This formula allows you to calculate the maximum exposure time that will keep motion blur within the acceptable threshold.
+
