@@ -1,32 +1,49 @@
 # Motion-Blur-vs-Exposure-Time
 The script calculates the maximum allowable exposure time for a camera to avoid motion blur that exceeds a specified threshold. This is crucial in scenarios requiring high precision, such as optical target tracking.
 
-## Key Concepts
-
-- **Motion Blur**: The streaking of moving objects in an image occurs when the object moves during the camera's exposure time.
-- **Exposure Time (`t_exp`)**: The amount of time the camera's sensor is exposed to light. A shorter exposure time can reduce motion blur.
-- **Relative Velocity (`v_rel`)**: The velocity of the target relative to the camera.
-- **Focal Length (`focal_len`)**: The distance between the lens and the image sensor when the subject is in focus, measured in millimeters.
-- **Pixel Size (`px_size`)**: The physical size of each pixel on the camera's sensor.
-- **Motion Blur Threshold (`blur_thresh`)**: The maximum acceptable amount of motion blur, typically expressed in terms of pixel displacement.
-
 ## Formulation
 
-The script calculates the maximum allowable exposure time (`t_exp`) based on the given motion blur threshold (`blur_thresh`). The relationship is derived from the basic motion blur equation:
+Motion blur occurs when a target or the camera moves while the camera's shutter is open. The moving target will spread across several pixels on the sensor, resulting in blur. The amount of motion blur depends on:
+- **Exposure Time (`t_exp`)**: The time the camera's sensor is exposed to light.
+- **Relative Velocity (`v_rel`)**: The speed of the target relative to the camera.
+- **Distance to Target (`z`)**: The distance between the camera and the target.
+- **Focal Length (`f`)**: The distance between the lens and the sensor, measured in millimeters.
+- **Pixel Size (`px_size`)**: The physical size of each pixel on the sensor, measured in millimeters.
 
-Motion Blur = (v_rel × t_exp × focal_len) / (z × px_size)
+### Motion Blur Equation
 
-Where:
+The amount of motion blur in pixels can be expressed as:
 
-- `v_rel` is the relative velocity of the target.
-- `t_exp` is the exposure time.
-- `focal_len` is the focal length.
-- `z` is the distance to the target.
-- `px_size` is the pixel size.
+Motion Blur = (v_rel × t_exp × f) / (z × px_size)
 
 To find the exposure time, the equation is rearranged as follows:
 
-t_exp = (blur_thresh × z × px_size) / (v_rel × focal_len)
+t_exp = (blur_thresh × z × px_size) / (v_rel × f)
 
 This formula allows you to calculate the maximum exposure time that will keep motion blur within the acceptable threshold.
 
+## Inputs
+
+The script requires the following inputs:
+
+1. **Camera Parameters:**
+   - **`res_h_px`**: Height of the camera sensor's resolution in pixels.
+   - **`res_w_px`**: Width of the camera sensor's resolution in pixels.
+   - **`focal_len_mm`**: Focal length of the camera lens in millimeters.
+   - **`sens_w_mm`**: Width of the camera sensor in millimeters.
+   - **`sens_h_mm`**: Height of the camera sensor in millimeters.
+
+   *Note: Some values are automatically computed from the resolution and sensor size. However, if you have the camera calibration matrix values (`f_x_px`, `f_y_px`, `c_x_px`, `c_y_px`), you may directly input those to the respective variables.*
+
+2. **Target and Camera Motion Parameters:**
+   - **`dist_to_tgt_m`**: Perpendicular distance from the camera to the target in meters.
+   - **`tgt_w_m`**: Width of the target in meters.
+   - **`tgt_h_m`**: Height of the target in meters.
+   - **`tgt_vel_h_m_s`**: Speed of the target relative to the camera in the horizontal direction in meters per second (m/s).
+   - **`tgt_vel_v_m_s`**: Speed of the target relative to the camera in the vertical direction in meters per second (m/s).
+
+3. **Motion Blur Parameters:**
+   - **`tgt_disp_m`**: Displacement of the target in the real world (in meters).
+   - **`blur_thresh_px`**: The maximum allowable motion blur, typically expressed in terms of pixel displacement (in pixels).
+
+These inputs are used by the script to calculate the maximum exposure time (`exp_time_h_s`, `exp_time_v_s`) that ensures motion blur does not exceed the specified threshold.
